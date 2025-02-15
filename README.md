@@ -1,3 +1,3 @@
 # Homelab
 
-![homelab drawio (1)](https://github.com/user-attachments/assets/5c744fc2-db93-43f2-a39c-c997e639e2b3)
+![homelab drawio](https://github.com/user-attachments/assets/7a5098bc-b2d7-444b-ac74-15ce19a237c7)
