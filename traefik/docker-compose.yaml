@@ -1,0 +1,18 @@
+---
+networks:
+  frontend:
+    external: true
+services:
+  traefik:
+    container_name: traefik-prod-01
+    image: traefik:3.3.3
+    ports:
+      - 80:80
+      - 443:443
+      - 8080:8080
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./config/traefik.yaml:/etc/traefik/traefik.yaml:ro
+    networks:
+      - frontend
+    restart: unless-stopped
