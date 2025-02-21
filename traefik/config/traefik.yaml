@@ -13,5 +13,5 @@ entryPoints:
     address: :443
 providers:
   docker:
-  endpoint: "unix:///var/run/docker.sock"
-  exposedByDefault: false
+    endpoint: "unix:///var/run/docker.sock"
+    exposedByDefault: false
