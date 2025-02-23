@@ -9,6 +9,8 @@ services:
     ports:
       - "53:53/tcp"
       - "53:53/udp"
+      - "80:80/tcp"
+      - "443:443/tcp"
     environment:
       TZ: "America/Los_Angeles"
     volumes:
