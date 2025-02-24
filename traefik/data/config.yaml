@@ -33,7 +33,7 @@ http:
     pihole:
       loadBalancer:
         servers:
-          - url: "http://10.10.10.15:8080"
+          - url: "http://10.10.10.15"
         passHostHeader: true
   #endregion
 
