@@ -37,8 +37,6 @@ sudo pihole -a -p
 
 Since accessing homelab on a separate VLAN, make sure to go to Settings > DNS > Bind only to interface eth0
 
-This was the error I was getting from pihole.log before making the change.
-
 ```
 pihole ignoring query from non-local network 192.168.10.254
 ```
