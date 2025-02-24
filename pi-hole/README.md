@@ -7,26 +7,30 @@
 
 4. Run the Docker Compose file:
 
-```
-# More info at https://github.com/pi-hole/docker-pi-hole/ and https://docs.pi-hole.net/
+```yaml
+---
+volumes:
+  pihole-data: {}
+
 services:
   pihole:
     container_name: pihole
-    image: pihole/pihole:latest
-    # For DHCP it is recommended to remove these ports and instead add: network_mode: "host"
+    image: pihole/pihole:2024.07.0 #latest v5 image
     ports:
       - "53:53/tcp"
       - "53:53/udp"
-      - "8080:80/tcp"
+      - "80:80/tcp"
+      - "443:443/tcp"
     environment:
-      TZ: 'America/Los_Angeles'
-      WEBPASSWORD: 'secretpassword'
-    # Volumes store your data between container upgrades
+      TZ: "America/Los_Angeles"
     volumes:
-      - './etc-pihole:/etc/pihole'
-      - './etc-dnsmasq.d:/etc/dnsmasq.d'
-    #   https://github.com/pi-hole/docker-pi-hole#note-on-capabilities
-    cap_add:
-      - NET_ADMIN # Required if you are using Pi-hole as your DHCP server, else not needed
+      - "pihole-data:/etc/pihole"
     restart: unless-stopped
+```
+
+Troubleshooting
+
+```
+Reset password
+sudo pihole -a -p
 ```
