@@ -3,23 +3,19 @@ For reference, the following folder structure was used:
 ```json
 ./traefik
 ├── data
-│   ├── acme.json
-│   ├── config.yml
-│   └── traefik.yml
-└── cf_api_token.txt
-└── docker-compose.yml
+│   ├── config.yaml
+│   └── traefik.yaml
+└── docker-compose.yaml
+└── .env
 ```
 
-Create docker network
+Create Docker network
 
 ```bash
 docker network create proxy
 ```
 
-Traefik Dashboard Password & .env
 Make sure you have htpasswd installed.
-
-To install on Linux
 
 ```
 sudo apt update
@@ -31,12 +27,10 @@ echo $(htpasswd -nB user) | sed -e s/\\$/\\$\\$/g
 ```
 
 ```
-touch .env
 vim .env
 ```
 
 paste your credential pair:
-
 e.g.
 
 ```
@@ -55,4 +49,7 @@ Troubleshooting
 docker ps
 docker logs traefik
 docker exec -it traefik /bin/sh
+
+#On the traefik server:
+curl -k https://10.10.10.3:8006
 ```
