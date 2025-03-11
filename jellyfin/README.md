@@ -1,8 +1,9 @@
 # jellyfin
 
-### Proxmox Host 
+### Proxmox Host
 
 1. Open the shell on your Proxmox node and find out the GID for video and render groups using the command cat /etc/group
+
 - Find video and render in the output. It should look something like this video:x:44: and render:x:104: Note the numbers 44 and 104.
 - Type this command and find what video and render devices you have ls /dev/dri/ . If you only have an iGPU, you may see cardx and renderDy in the output. If you have an iGPU and a dGPU, you may see cardx1, cardx2 and renderDy1 and renderDy2 . Here x may be 0 or 1 or 2 and y may be 128 or 129. (This guide only focuses on iGPU pass through but you may be able to passthrough a dGPU in a similar manner. I just haven't done it and I am not a 100% sure it would work.)
 - We need to pass the cardx and renderD devices to the lxc. Note down these devices
@@ -11,7 +12,7 @@
 2. Go to your container and in the resources tab, select Add -> Device Passthrough .
 3. In the device path add the path of cardx - /dev/dri/cardx
 4. In the GID in CT field, enter the number that you found in step 1 for video group. In my case, it is 44. Hit OK
-Follow the same procedure as step 3 but in the device path, add the path of renderDy group (/dev/dri/renderDy) and in the GID field, add the ID associated with the render group (104 in my case)
+   Follow the same procedure as step 3 but in the device path, add the path of renderDy group (/dev/dri/renderDy) and in the GID field, add the ID associated with the render group (104 in my case)
 
 5. Start your container and go to the container console. Check that both the devices are now available using the command ls /dev/dri
 
@@ -63,6 +64,15 @@ sudo mount -a
 ```
 
 ### Troubleshooting
+
+Add jellyfin user to render/video group
+
+```
+usermod -aG render jellyfin
+usermod -aG video jellyfin
+systemctl restart jellyfin
+
+```
 
 ```
 journalctl -u jellyfin --no-pager --lines=50
